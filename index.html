@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>קלפידל — חידת פוליטיקאי יומית</title>
+<meta name="description" content="נחשו את הפוליטיקאי הישראלי של היום בשמונה ניסיונות. נתונים מהאתר הפתוח של הכנסת.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;900&family=Assistant:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4f1ea; --slip:#fffdf8; --ink:#1d2433; --muted:#6b6f7a; --line:#d9d3c5;
+  --envelope:#2f5fa7; --envelope-ink:#fff;
+  --hit:#2f8a57; --near:#d9a521; --miss:#c9c3b6; --cell-ink:#fff;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#14171f; --slip:#1d212c; --ink:#ecebe6; --muted:#9a9ea8; --line:#30364a;
+  --envelope:#3f72c0; --hit:#2f8a57; --near:#b8891a; --miss:#3a4052;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 Assistant,system-ui,sans-serif;
+  background-image:repeating-linear-gradient(0deg,transparent 0 31px,rgba(0,0,0,.025) 31px 32px)}
+main{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+header{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.box{width:52px;height:52px;flex:none;position:relative;background:var(--envelope);border-radius:6px}
+.box::before{content:"";position:absolute;left:12px;right:12px;top:10px;height:5px;background:var(--paper);border-radius:3px}
+.box::after{content:"ק";position:absolute;inset:auto 0 6px;text-align:center;color:#fff;font:900 22px "Frank Ruhl Libre",serif}
+h1{font:900 clamp(30px,7vw,44px)/1 "Frank Ruhl Libre",serif;margin:0;letter-spacing:-.5px}
+.sub{color:var(--muted);margin:0}
+.rules{margin:14px 0 18px;padding:12px 14px;border:1px dashed var(--line);border-radius:8px;font-size:15px}
+.rules b{white-space:nowrap}
+form{display:flex;gap:8px;position:sticky;top:0;padding:10px 0;background:var(--paper);z-index:2}
+input{flex:1;min-width:0;font:inherit;font-size:18px;padding:12px 14px;border:2px solid var(--ink);border-radius:8px;background:var(--slip);color:var(--ink)}
+button{font:800 17px Assistant,sans-serif;padding:12px 18px;border:0;border-radius:8px;background:var(--envelope);color:var(--envelope-ink);cursor:pointer}
+button:disabled{opacity:.45;cursor:default}
+button.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.msg{min-height:24px;color:#b3412f;font-weight:600;margin:4px 0}
+.heads,.row{display:grid;grid-template-columns:1.35fr repeat(5,1fr);gap:6px}
+.heads{font-size:13px;color:var(--muted);font-weight:800;text-align:center;margin:8px 0 4px}
+.heads span:first-child{text-align:right}
+.row{background:var(--slip);border:1px solid var(--line);border-radius:6px;padding:6px;margin-bottom:8px;
+  box-shadow:0 1px 0 var(--line);animation:drop .35s ease-out both}
+@keyframes drop{from{transform:translateY(-14px) rotate(-1deg);opacity:0}}
+.name{font:900 17px/1.15 "Frank Ruhl Libre",serif;display:flex;align-items:center;padding-inline-start:4px}
+.cell{border-radius:4px;min-height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;font-weight:800;font-size:14px;line-height:1.15;padding:4px 2px;color:var(--cell-ink);background:var(--miss)}
+.cell.hit{background:var(--hit)} .cell.near{background:var(--near)}
+.cell small{font-size:18px;line-height:1}
+@media (prefers-color-scheme:light){.cell:not(.hit):not(.near){color:var(--ink)}}
+:root[data-theme="light"] .cell:not(.hit):not(.near){color:var(--ink)}
+.end{margin-top:18px;padding:18px;border-radius:10px;background:var(--envelope);color:#fff;text-align:center}
+.end h2{font:900 26px "Frank Ruhl Libre",serif;margin:0 0 4px}
+.end p{margin:4px 0}
+.end .acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.end button{background:#fff;color:var(--envelope)}
+.facts{font-size:14px;opacity:.9}
+footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}
+footer a{color:inherit}
+@media (max-width:560px){
+  .heads,.row{grid-template-columns:repeat(5,1fr)}
+  .heads span:first-child{display:none}
+  .name{grid-column:1/-1;padding:2px 2px 4px}
+  .cell{font-size:12px;min-height:50px}
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="box" aria-hidden="true"></div>
+    <div>
+      <h1>קלפידל</h1>
+      <p class="sub">פוליטיקאי אחד ביום. שמונה פתקים.</p>
+    </div>
+  </header>
+
+  <div class="rules">
+    נחשו חבר/ת כנסת או שר/ה. כל ניחוש מגלה חמישה רמזים:
+    <b>מפלגה אחרונה</b>, <b>שנת כניסה</b> לכנסת/לממשלה, <b>מספר מפלגות</b> שעבר/ה,
+    <b>התפקיד הבכיר</b> ביותר ו<b>מספר כנסות</b>.
+    🟩 בול · 🟨 קרוב (או מפלגה שהיה/הייתה בה פעם) · ⬆️⬇️ התשובה גבוהה/נמוכה יותר.
+  </div>
+
+  <form id="f" autocomplete="off">
+    <input id="q" list="names" placeholder="הקלידו שם…" aria-label="שם הפוליטיקאי">
+    <datalist id="names"></datalist>
+    <button id="go">הצבעה</button>
+  </form>
+  <div class="msg" id="msg" role="status"></div>
+
+  <div class="heads" aria-hidden="true">
+    <span>שם</span><span>מפלגה אחרונה</span><span>שנת כניסה</span><span>מס' מפלגות</span><span>תפקיד בכיר</span><span>כנסות</span>
+  </div>
+  <div id="board"></div>
+  <div id="end"></div>
+
+  <footer>
+    פיילוט · נתונים מ<a href="https://knesset.gov.il/Odata/ParliamentInfo.svc" rel="noopener">ה-API הפתוח של הכנסת</a>.
+    מפלגה = שושלת (חרות→ליכוד, מפא"י→העבודה); רשימה משותפת נספרת כמפלגה המובילה בה.
+  </footer>
+</main>
+
+<script src="data.js"></script>
+<script>
+const MAX = 8;
+const byId = new Map(POLS.map(p => [p.id, p]));
+const byName = new Map(POLS.map(p => [p.name, p]));
+const $ = id => document.getElementById(id);
+
+// Daily answer: Israel-time day number into a fixed shuffle of the pool.
+const day = Math.floor((Date.now() + 3 * 36e5) / 864e5);
+function shuffled(arr, seed) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    seed = (seed * 1103515245 + 12345) % 2147483648;
+    const j = seed % (i + 1); [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+const ORDER = shuffled(POOL, 20261);
+let answer = byId.get(ORDER[day % ORDER.length]);
+let daily = true, guesses = [];
+
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+
+$('names').innerHTML = POLS.map(p => `<option value="${p.name}">`).join('');
+
+// Each clue: [class, shown value, arrow toward the answer].
+function num(g, t, near, shown = g) {
+  if (g === t) return ['hit', shown, ''];
+  return [Math.abs(g - t) <= near ? 'near' : '', shown, g < t ? '⬆️' : '⬇️'];
+}
+
+function clues(g, t) {
+  const party = g.party === t.party ? 'hit' : t.parties.includes(g.party) ? 'near' : '';
+  return [
+    [party, g.party, ''],
+    num(g.since, t.since, 3),
+    num(g.parties.length, t.parties.length, 1),
+    num(g.role, t.role, 0, g.roleName),
+    num(g.knessets, t.knessets, 1),
+  ];
+}
+
+function row(g) {
+  const cells = clues(g, answer).map(([cls, val, arrow]) =>
+    `<div class="cell ${cls}"><span>${val}</span>${arrow ? `<small aria-label="${arrow === '⬆️' ? 'גבוה יותר' : 'נמוך יותר'}">${arrow}</small>` : ''}</div>`).join('');
+  return `<div class="row"><div class="name">${g.name}</div>${cells}</div>`;
+}
+
+function render() {
+  $('board').innerHTML = guesses.map(id => row(byId.get(id))).reverse().join('');
+  const won = guesses.at(-1) === answer.id, over = won || guesses.length >= MAX;
+  $('q').disabled = $('go').disabled = over;
+  $('q').placeholder = over ? '' : `ניחוש ${guesses.length + 1} מתוך ${MAX}`;
+  $('end').innerHTML = over ? `
+    <div class="end">
+      <h2>${won ? 'נבחר/ה! 🗳️' : 'הקלפי נסגרה'}</h2>
+      <p>${won ? `ב-${guesses.length} פתקים.` : 'התשובה:'} <b>${answer.name}</b></p>
+      <p class="facts">${answer.roleName} · מאז ${answer.since} · ${answer.knessets} כנסות
+        ${answer.parties.length ? `· ${answer.parties.join(' ← ')}` : ''}</p>
+      <div class="acts">
+        ${daily ? '<button id="share">שיתוף</button>' : ''}
+        <button id="again">עוד פוליטיקאי</button>
+      </div>
+    </div>` : '';
+  if (over) {
+    $('again').onclick = randomRound;
+    if (daily) $('share').onclick = share;
+  }
+}
+
+function share() {
+  const grid = guesses.map(id => clues(byId.get(id), answer)
+    .map(([c]) => c === 'hit' ? '🟩' : c === 'near' ? '🟨' : '⬜').join('')).join('\n');
+  const won = guesses.at(-1) === answer.id;
+  const text = `קלפידל #${day % 10000} ${won ? guesses.length : 'X'}/${MAX}\n${grid}\n${location.href}`;
+  if (navigator.share) navigator.share({ text }).catch(() => {});
+  else navigator.clipboard.writeText(text).then(() => $('msg').textContent = 'הועתק ✓');
+}
+
+function randomRound() {
+  daily = false; guesses = [];
+  answer = byId.get(POOL[Math.floor(Math.random() * POOL.length)]);
+  $('msg').textContent = 'סבב חופשי — לא נשמר בסטטיסטיקה';
+  render(); $('q').focus();
+}
+
+$('f').onsubmit = e => {
+  e.preventDefault();
+  const q = $('q').value.trim();
+  const g = byName.get(q) ?? POLS.find(p => p.name.includes(q) && q.length > 2 &&
+    POLS.filter(x => x.name.includes(q)).length === 1);
+  if (!g) { $('msg').textContent = 'לא מכירים את השם הזה — בחרו מהרשימה'; return; }
+  if (guesses.includes(g.id)) { $('msg').textContent = 'כבר ניחשתם את זה'; return; }
+  $('msg').textContent = '';
+  guesses.push(g.id); $('q').value = '';
+  if (daily) store.set('kalpidle-' + day, guesses);
+  render();
+};
+
+guesses = store.get('kalpidle-' + day) ?? [];
+render();
+</script>
+</body>
+</html>
